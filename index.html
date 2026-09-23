@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1557d6">
+  <meta name="description" content="中學化學 13.1：由元素到週期表。用字卡、配對與選擇題熟習考試常見英文詞彙。">
+  <title>Element Lab｜13.1 化學詞彙溫習</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='15' fill='%231557d6'/%3E%3Ccircle cx='32' cy='32' r='5' fill='white'/%3E%3Cellipse cx='32' cy='32' rx='23' ry='10' fill='none' stroke='white' stroke-width='4'/%3E%3Cellipse cx='32' cy='32' rx='23' ry='10' fill='none' stroke='white' stroke-width='4' transform='rotate(60 32 32)'/%3E%3Cellipse cx='32' cy='32' rx='23' ry='10' fill='none' stroke='white' stroke-width='4' transform='rotate(120 32 32)'/%3E%3C/svg%3E">
+  <style>
+    :root {
+      --ink: #10213f;
+      --muted: #687795;
+      --line: #dfe7f3;
+      --canvas: #f4f7fb;
+      --surface: #ffffff;
+      --blue: #1557d6;
+      --blue-2: #3478f6;
+      --blue-soft: #eaf2ff;
+      --navy: #102b63;
+      --mint: #13b982;
+      --mint-soft: #e6faf3;
+      --orange: #ff8a30;
+      --orange-soft: #fff1e4;
+      --violet: #7257e8;
+      --violet-soft: #f0edff;
+      --red: #ef4d5e;
+      --shadow: 0 18px 55px rgba(16, 43, 99, .12);
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 4% 5%, rgba(52,120,246,.10), transparent 28rem),
+        radial-gradient(circle at 98% 82%, rgba(19,185,130,.09), transparent 30rem),
+        var(--canvas);
+      font-family: Inter, ui-rounded, "SF Pro Rounded", "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+
+    button { font: inherit; }
+    button { -webkit-tap-highlight-color: transparent; }
+    button:focus-visible, select:focus-visible, [tabindex]:focus-visible {
+      outline: 3px solid rgba(52,120,246,.35);
+      outline-offset: 3px;
+    }
+
+    .app-shell { width: min(1040px, calc(100% - 32px)); margin: 18px auto 40px; }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 10px 4px 28px;
+    }
+
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      color: white;
+      background: var(--blue);
+      box-shadow: 0 10px 25px rgba(21,87,214,.25);
+    }
+    .brand-mark svg { width: 27px; height: 27px; }
+    .brand strong { display: block; font-size: 1.05rem; letter-spacing: -.02em; }
+    .brand span { display: block; color: var(--muted); font-size: .78rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+
+    .top-progress { display: flex; align-items: center; gap: 13px; }
+    .progress-copy { text-align: right; }
+    .progress-copy strong { display: block; font-size: .92rem; }
+    .progress-copy span { color: var(--muted); font-size: .8rem; }
+    .progress-ring {
+      --progress: 0deg;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(var(--mint) var(--progress), #dfe8f4 0);
+      position: relative;
+      font-size: .72rem;
+      font-weight: 900;
+    }
+    .progress-ring::before { content: ""; position: absolute; inset: 5px; background: var(--surface); border-radius: 50%; }
+    .progress-ring span { position: relative; }
+
+    .section-head { display: flex; align-items: center; justify-content: space-between; gap: 18px; margin: 8px 4px 18px; }
+    .section-head h1 { margin: 2px 0 0; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1.2; letter-spacing: -.035em; }
+    .chapter-kicker { color: var(--blue); font-size: .78rem; font-weight: 900; letter-spacing: .07em; }
+    .count-chip { flex: none; padding: 7px 11px; border-radius: 99px; color: var(--blue); background: var(--blue-soft); font-size: .82rem; font-weight: 800; }
+    .topic-heading { display: flex; align-items: center; gap: 14px; min-width: 0; }
+    .topic-heading .back-btn { flex: none; }
+
+    .topic-card {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 22px;
+      width: 100%;
+      min-height: 150px;
+      padding: 28px 30px;
+      border: 0;
+      border-radius: var(--radius-lg);
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(16,43,99,.07);
+      cursor: pointer;
+      text-align: left;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .topic-card:hover { transform: translateY(-4px); box-shadow: 0 18px 38px rgba(16,43,99,.13); }
+    .topic-number { display: grid; place-items: center; width: 72px; height: 72px; border-radius: 20px; color: white; background: var(--blue); font-size: 1.25rem; font-weight: 900; }
+    .topic-card h2 { margin: 0 0 5px; font-size: clamp(1.25rem, 3vw, 1.65rem); line-height: 1.25; }
+    .topic-card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .topic-card .arrow { font-size: 1.55rem; font-weight: 900; transition: transform .2s ease; }
+    .topic-card:hover .arrow { transform: translateX(4px); }
+
+    .mode-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .mode-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: 50px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 16px;
+      min-height: 118px;
+      padding: 22px;
+      border: 0;
+      border-radius: var(--radius-lg);
+      color: var(--ink);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(16,43,99,.07);
+      cursor: pointer;
+      text-align: left;
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .mode-card:hover { transform: translateY(-5px); box-shadow: 0 18px 38px rgba(16,43,99,.13); }
+    .mode-icon { grid-column: 1; grid-row: 1; display: grid; place-items: center; width: 50px; height: 50px; border-radius: 16px; }
+    .mode-icon svg { width: 26px; height: 26px; }
+    .mode-card.flash .mode-icon { color: var(--blue); background: var(--blue-soft); }
+    .mode-card.match .mode-icon { color: var(--mint); background: var(--mint-soft); }
+    .mode-card.quiz .mode-icon { color: var(--orange); background: var(--orange-soft); }
+    .mode-card h3 { grid-column: 2; grid-row: 1; margin: 0; font-size: 1.08rem; line-height: 1.3; }
+    .mode-card .arrow { grid-column: 3; grid-row: 1; font-size: 1.25rem; font-weight: 900; transition: transform .2s ease; }
+    .mode-card:hover .arrow { transform: translateX(4px); }
+
+    .view { display: none; animation: rise .25s ease; }
+    .view.active { display: block; }
+    @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+    .study-head { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin: 8px 0 22px; }
+    .back-btn, .ghost-btn, .sound-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 9px 15px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      color: var(--ink);
+      background: var(--surface);
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .back-btn:hover, .ghost-btn:hover, .sound-btn:hover { background: var(--blue-soft); border-color: #c9daf9; }
+    .study-title { text-align: center; }
+    .study-title h1 { margin: 0; font-size: 1.35rem; }
+    .study-title p { margin: 3px 0 0; color: var(--muted); font-size: .83rem; }
+    .head-spacer { width: 90px; }
+
+    .toolbar { display: flex; align-items: center; justify-content: flex-end; margin-bottom: 15px; }
+    .step-copy { color: var(--muted); font-size: .88rem; font-weight: 750; }
+
+    .flash-stage { perspective: 1200px; }
+    .flash-card {
+      position: relative;
+      width: 100%;
+      min-height: 340px;
+      border: 0;
+      border-radius: 28px;
+      color: var(--ink);
+      background: transparent;
+      cursor: pointer;
+      transform-style: preserve-3d;
+      transition: transform .55s cubic-bezier(.2,.8,.2,1);
+    }
+    .flash-card.flipped { transform: rotateY(180deg); }
+    .flash-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 42px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+      backface-visibility: hidden;
+    }
+    .flash-face.back { transform: rotateY(180deg); background: linear-gradient(145deg, #f8fbff, #edf4ff); }
+    .flash-word { margin: 0 0 15px; text-align: center; font-size: clamp(2.4rem, 7vw, 4.7rem); line-height: 1.06; letter-spacing: -.05em; }
+    .flash-hint { color: var(--muted); font-size: .9rem; }
+    .flash-zh { margin: 0; text-align: center; color: var(--blue); font-size: clamp(2.4rem, 7vw, 4.5rem); line-height: 1.2; }
+
+    .flash-controls { display: grid; grid-template-columns: 1fr auto 1fr; gap: 12px; margin-top: 16px; }
+    .action-btn {
+      min-height: 54px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 14px;
+      color: white;
+      font-weight: 850;
+      cursor: pointer;
+      transition: transform .15s ease, filter .15s ease;
+    }
+    .action-btn:hover { filter: brightness(.97); transform: translateY(-2px); }
+    .review-btn { background: var(--orange); }
+    .know-btn { background: var(--mint); }
+    .sound-btn { width: 54px; padding: 0; }
+
+    .game-panel {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 25px;
+      background: var(--surface);
+      box-shadow: var(--shadow);
+    }
+    .game-progress { height: 8px; margin-bottom: 25px; overflow: hidden; border-radius: 99px; background: #e7edf6; }
+    .game-progress span { display: block; width: 0; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--blue), #75a9ff); transition: width .3s ease; }
+
+    .match-help { margin: -5px 0 20px; color: var(--muted); text-align: center; }
+    .match-board { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 18px; }
+    .match-column { display: grid; gap: 11px; }
+    .match-option {
+      min-height: 62px;
+      padding: 12px 16px;
+      border: 2px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: #fbfcfe;
+      font-weight: 780;
+      cursor: pointer;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .match-option:hover { border-color: #aac7fa; transform: translateY(-1px); }
+    .match-option.selected { border-color: var(--blue); background: var(--blue-soft); color: var(--blue); }
+    .match-option.matched { border-color: #aee8d5; color: #278b6a; background: var(--mint-soft); opacity: .55; cursor: default; }
+    .match-option.wrong { animation: shake .32s ease; border-color: #f5aab3; background: #fff0f2; }
+    @keyframes shake { 25% { transform: translateX(-5px); } 50% { transform: translateX(5px); } 75% { transform: translateX(-3px); } }
+
+    .quiz-wrap { max-width: 820px; margin: auto; }
+    .quiz-kicker { color: var(--blue); font-size: .82rem; font-weight: 900; letter-spacing: .05em; text-transform: uppercase; }
+    .quiz-question { margin: 10px 0 24px; font-size: clamp(1.7rem, 4vw, 2.7rem); line-height: 1.2; letter-spacing: -.035em; }
+    .answers { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .answer {
+      min-height: 72px;
+      padding: 14px 17px;
+      border: 2px solid var(--line);
+      border-radius: 15px;
+      color: var(--ink);
+      background: #fbfcfe;
+      font-weight: 780;
+      cursor: pointer;
+      text-align: left;
+      transition: border-color .15s ease, background .15s ease, transform .15s ease;
+    }
+    .answer:hover:not(:disabled) { border-color: #aac7fa; transform: translateY(-2px); }
+    .answer.correct { border-color: var(--mint); background: var(--mint-soft); color: #167858; }
+    .answer.incorrect { border-color: var(--red); background: #fff0f2; color: #bd2f40; }
+    .answer:disabled { cursor: default; }
+    .feedback {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 20px;
+      padding: 15px 17px;
+      border-radius: 14px;
+      background: var(--blue-soft);
+    }
+    .feedback.show { display: flex; }
+    .feedback strong { display: block; }
+    .feedback span { color: var(--muted); font-size: .86rem; }
+    .next-btn { flex: none; min-height: 43px; padding: 9px 16px; border: 0; border-radius: 11px; color: white; background: var(--blue); font-weight: 850; cursor: pointer; }
+
+    .result-card { padding: 45px 24px; text-align: center; }
+    .result-orb { display: grid; place-items: center; width: 110px; height: 110px; margin: 0 auto 20px; border-radius: 50%; color: white; background: var(--blue); box-shadow: 0 18px 35px rgba(21,87,214,.24); font-size: 2rem; font-weight: 900; }
+    .result-card h2 { margin: 0 0 8px; font-size: 2rem; }
+    .result-card p { margin: 0 auto 24px; color: var(--muted); }
+    .result-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 10px; }
+    .primary-btn { min-height: 46px; padding: 10px 20px; border: 0; border-radius: 12px; color: white; background: var(--blue); font-weight: 850; cursor: pointer; }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 28px;
+      z-index: 30;
+      max-width: calc(100% - 32px);
+      padding: 11px 17px;
+      border-radius: 12px;
+      color: white;
+      background: var(--navy);
+      box-shadow: 0 12px 30px rgba(16,33,63,.25);
+      font-weight: 750;
+      transform: translate(-50%, 100px);
+      opacity: 0;
+      transition: .25s ease;
+      pointer-events: none;
+    }
+    .toast.show { transform: translate(-50%, 0); opacity: 1; }
+
+    @media (max-width: 800px) {
+      .app-shell { width: min(100% - 22px, 680px); margin-top: 8px; }
+      .topbar { padding-bottom: 12px; }
+      .progress-copy { display: none; }
+      .mode-grid { grid-template-columns: 1fr; }
+      .mode-card { min-height: 92px; }
+      .flash-card { min-height: 330px; }
+    }
+
+    @media (max-width: 520px) {
+      .brand-mark { width: 42px; height: 42px; border-radius: 13px; }
+      .brand strong { font-size: .93rem; }
+      .brand span { font-size: .69rem; }
+      .progress-ring { width: 44px; }
+      .section-head { align-items: center; }
+      .section-head h1 { font-size: 1.35rem; }
+      .topic-heading { gap: 9px; }
+      .topic-heading .back-btn { width: 44px; padding: 0; font-size: 0; }
+      .topic-heading .back-btn span { font-size: 1.15rem; }
+      .topic-card { gap: 14px; min-height: 118px; padding: 21px 18px; }
+      .topic-number { width: 58px; height: 58px; border-radius: 17px; font-size: 1rem; }
+      .topic-card p { font-size: .82rem; }
+      .study-head { margin-top: 4px; }
+      .study-title h1 { font-size: 1.05rem; }
+      .study-title p { display: none; }
+      .head-spacer { width: 44px; }
+      .back-btn { width: 44px; padding: 0; font-size: 0; }
+      .back-btn span { font-size: 1.15rem; }
+      .step-copy { align-self: center; font-size: .78rem; }
+      .flash-card { min-height: 310px; }
+      .flash-face { padding: 28px 20px; }
+      .flash-controls { grid-template-columns: 1fr 48px 1fr; gap: 8px; }
+      .action-btn { padding: 10px 7px; font-size: .9rem; }
+      .sound-btn { width: 48px; }
+      .game-panel { padding: 19px 14px; border-radius: 20px; }
+      .match-board { grid-template-columns: 1fr 1fr; gap: 8px; }
+      .match-option { min-height: 64px; padding: 9px 7px; font-size: .86rem; }
+      .answers { grid-template-columns: 1fr; }
+      .answer { min-height: 60px; }
+      .feedback { align-items: flex-start; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand" aria-label="Element Lab">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="16" cy="16" r="2.4" fill="currentColor" stroke="none"/>
+            <ellipse cx="16" cy="16" rx="12" ry="5"/>
+            <ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(60 16 16)"/>
+            <ellipse cx="16" cy="16" rx="12" ry="5" transform="rotate(120 16 16)"/>
+          </svg>
+        </div>
+        <div><strong>Element Lab</strong><span>Chemistry Vocabulary</span></div>
+      </div>
+      <div class="top-progress" aria-label="整體掌握進度">
+        <div class="progress-copy"><strong>今日進度</strong><span id="mastered-copy">0 個已掌握</span></div>
+        <div class="progress-ring" id="progress-ring"><span id="progress-percent">0%</span></div>
+      </div>
+    </header>
+
+    <section id="topics-view" class="view active" aria-labelledby="topics-title">
+      <div class="section-head">
+        <div><span class="chapter-kicker">CHEMISTRY VOCABULARY</span><h1 id="topics-title">選擇課題</h1></div>
+      </div>
+      <button class="topic-card" data-open="home" type="button">
+        <span class="topic-number">13.1</span>
+        <span>
+          <h2>Element to Periodic Table</h2>
+          <p>64 個詞彙</p>
+        </span>
+        <span class="arrow" aria-hidden="true">→</span>
+      </button>
+    </section>
+
+    <section id="home-view" class="view" aria-labelledby="home-title">
+      <div class="section-head">
+        <div class="topic-heading">
+          <button class="back-btn" data-topics type="button"><span>←</span> 課題</button>
+          <div><span class="chapter-kicker">CHEMISTRY 13.1</span><h1 id="home-title">Element to Periodic Table</h1></div>
+        </div>
+        <span class="count-chip" id="review-chip">0 / 64 已掌握</span>
+      </div>
+
+      <div class="mode-grid">
+        <button class="mode-card flash" data-open="flash" type="button">
+          <span class="mode-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="14" height="17" rx="2"/><path d="M8 7h6M8 11h6"/><path d="M18 7h2v14a1 1 0 0 1-1 1H8"/></svg>
+          </span>
+          <span class="arrow">→</span>
+          <h3>Flashcards 字卡</h3>
+        </button>
+        <button class="mode-card match" data-open="match" type="button">
+          <span class="mode-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h12M4 6h.01M4 12h.01M4 18h.01M8 12h12M8 18h12"/><path d="m16 3 4 3-4 3"/></svg>
+          </span>
+          <span class="arrow">→</span>
+          <h3>Matching 配對</h3>
+        </button>
+        <button class="mode-card quiz" data-open="quiz" type="button">
+          <span class="mode-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.2 9a3 3 0 1 1 5.2 2c-1.4 1.2-2.4 1.7-2.4 3"/><path d="M12 18h.01"/><circle cx="12" cy="12" r="10"/></svg>
+          </span>
+          <span class="arrow">→</span>
+          <h3>MC 選擇題</h3>
+        </button>
+      </div>
+    </section>
+
+    <section id="flash-view" class="view" aria-labelledby="flash-title">
+      <div class="study-head">
+        <button class="back-btn" data-home type="button"><span>←</span> 返回</button>
+        <div class="study-title"><h1 id="flash-title">Flashcards 字卡</h1><p>點擊卡片翻到中文解釋</p></div>
+        <div class="head-spacer"></div>
+      </div>
+      <div class="toolbar">
+        <span class="step-copy" id="flash-count">1 / 64</span>
+      </div>
+      <div class="flash-stage">
+        <button class="flash-card" id="flash-card" type="button" aria-label="翻開字卡">
+          <span class="flash-face front">
+            <strong class="flash-word" id="flash-word">element</strong>
+            <span class="flash-hint">點一下查看中文意思</span>
+          </span>
+          <span class="flash-face back">
+            <strong class="flash-zh" id="flash-zh">元素</strong>
+          </span>
+        </button>
+      </div>
+      <div class="flash-controls">
+        <button class="action-btn review-btn" id="review-btn" type="button">← 稍後再看</button>
+        <button class="sound-btn" id="sound-btn" type="button" aria-label="播放英文讀音">🔊</button>
+        <button class="action-btn know-btn" id="know-btn" type="button">我識喇 ✓</button>
+      </div>
+    </section>
+
+    <section id="match-view" class="view" aria-labelledby="match-title">
+      <div class="study-head">
+        <button class="back-btn" data-home type="button"><span>←</span> 返回</button>
+        <div class="study-title"><h1 id="match-title">Matching 配對</h1><p>先選英文，再選相對的中文意思</p></div>
+        <button class="ghost-btn" id="new-match" type="button">換一組</button>
+      </div>
+      <div class="game-panel" id="match-panel">
+        <div class="game-progress"><span id="match-progress"></span></div>
+        <p class="match-help" id="match-help">找出 6 組正確配對</p>
+        <div class="match-board">
+          <div class="match-column" id="match-en"></div>
+          <div class="match-column" id="match-zh"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quiz-view" class="view" aria-labelledby="quiz-title">
+      <div class="study-head">
+        <button class="back-btn" data-home type="button"><span>←</span> 返回</button>
+        <div class="study-title"><h1 id="quiz-title">MC 選擇題</h1><p>每次 10 題，中英雙向練習</p></div>
+        <button class="ghost-btn" id="restart-quiz" type="button">重新出題</button>
+      </div>
+      <div class="game-panel quiz-wrap" id="quiz-panel"></div>
+    </section>
+
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const WORDS = [
+      {en:'element', zh:'元素', cat:'basics', def:'只由一種原子組成，不能用化學方法再分解的純物質。', ex:'An element cannot be broken down by chemical methods.'},
+      {en:'broken down', zh:'分解', cat:'basics', def:'把一種物質變成較簡單的物質。', ex:'Water can be broken down into hydrogen and oxygen.'},
+      {en:'chemical method', zh:'化學方法', cat:'basics', def:'涉及化學反應、會產生新物質的方法。', ex:'A compound can be separated by a chemical method.'},
+      {en:'physical method', zh:'物理方法', cat:'basics', def:'不產生新物質的分離或改變方法。', ex:'Filtration is a physical method.'},
+      {en:'atom', zh:'原子', cat:'basics', def:'構成元素並保留該元素化學性質的最小粒子。', ex:'An atom is the basic unit of an element.'},
+      {en:'basic unit', zh:'基本單位', cat:'basics', def:'構成某物質最基本的部分。', ex:'The atom is the basic unit of an element.'},
+      {en:'chemical symbol', zh:'化學符號', cat:'basics', def:'代表元素的國際通用縮寫，例如 H、O、Na。', ex:'O is the chemical symbol for oxygen.'},
+      {en:'metals', zh:'金屬', cat:'properties', def:'通常有光澤，並且能導電和導熱的一類元素。', ex:'Most elements in the periodic table are metals.'},
+      {en:'semi-metals', zh:'半金屬', cat:'properties', def:'性質介乎金屬和非金屬之間的元素。', ex:'Silicon and boron are semi-metals.'},
+      {en:'non-metals', zh:'非金屬', cat:'properties', def:'通常缺乏金屬特性的一類元素。', ex:'Oxygen and sulfur are non-metals.'},
+      {en:'room temperature', zh:'室溫', cat:'properties', def:'一般室內環境的溫度，科學題常視作約 25°C。', ex:'Mercury is a liquid at room temperature.'},
+      {en:'room pressure', zh:'室壓', cat:'properties', def:'一般室內環境的大氣壓力。', ex:'The sample is a gas at room pressure.'},
+      {en:'states', zh:'物態', cat:'properties', def:'物質存在的形式，例如固態、液態和氣態。', ex:'The three common states are solid, liquid and gas.'},
+      {en:'solid', zh:'固體／固態', cat:'properties', def:'有固定形狀和固定體積的物態。', ex:'Iron is a solid at room temperature.'},
+      {en:'liquid', zh:'液體／液態', cat:'properties', def:'有固定體積但沒有固定形狀的物態。', ex:'Bromine is a liquid at room temperature.'},
+      {en:'gas', zh:'氣體／氣態', cat:'properties', def:'沒有固定形狀和固定體積的物態。', ex:'Helium is a gas at room temperature.'},
+      {en:'appearance', zh:'外觀', cat:'properties', def:'物質看起來的樣子，例如顏色及光澤。', ex:'Describe the appearance of the metal.'},
+      {en:'shiny', zh:'有光澤的', cat:'properties', def:'表面能反射光，看起來明亮。', ex:'A freshly cut metal surface is shiny.'},
+      {en:'dull', zh:'暗啞的', cat:'properties', def:'表面缺乏光澤，不明亮。', ex:'Sulfur has a dull appearance.'},
+      {en:'melting point', zh:'熔點', cat:'properties', def:'物質由固態轉為液態的溫度。', ex:'Iron has a high melting point.'},
+      {en:'boiling point', zh:'沸點', cat:'properties', def:'物質由液態轉為氣態的溫度。', ex:'Water has a boiling point of 100°C at standard pressure.'},
+      {en:'malleability', zh:'可展性', cat:'properties', def:'物質可被壓成薄片而不破裂的能力。', ex:'Gold has high malleability.'},
+      {en:'ductility', zh:'延性', cat:'properties', def:'物質可被拉成幼線而不折斷的能力。', ex:'Copper has good ductility.'},
+      {en:'strength', zh:'強度', cat:'properties', def:'物料抵抗外力而不破裂或變形的能力。', ex:'Steel is used because of its strength.'},
+      {en:'electrical conductivity', zh:'導電性', cat:'properties', def:'物質傳導電流的能力。', ex:'Copper has high electrical conductivity.'},
+      {en:'thermal conductivity', zh:'導熱性', cat:'properties', def:'物質傳遞熱能的能力。', ex:'Metals usually have high thermal conductivity.'},
+      {en:'density', zh:'密度', cat:'properties', def:'物質每單位體積的質量。', ex:'Density equals mass divided by volume.'},
+      {en:'silicon', zh:'硅', cat:'applications', def:'化學符號為 Si 的半金屬，常用於電子工業。', ex:'Silicon is used to make computer chips.'},
+      {en:'boron', zh:'硼', cat:'applications', def:'化學符號為 B 的半金屬元素。', ex:'Boron is classified as a semi-metal.'},
+      {en:'computer chips', zh:'電腦芯片', cat:'applications', def:'電子設備中處理資料的微小元件。', ex:'Silicon is widely used in computer chips.'},
+      {en:'integrated circuits', zh:'集成電路', cat:'applications', def:'把許多電子元件製作在單一芯片上的電路。', ex:'Integrated circuits contain many tiny components.'},
+      {en:'particle', zh:'粒子', cat:'structure', def:'構成物質的微小單位的統稱。', ex:'Matter is made up of tiny particles.'},
+      {en:'molecule', zh:'分子', cat:'structure', def:'由兩個或以上原子以化學鍵結合而成的粒子。', ex:'A water molecule contains three atoms.'},
+      {en:'structure', zh:'結構', cat:'structure', def:'各部分的組成及排列方式。', ex:'Scientists use models to show atomic structure.'},
+      {en:'proton', zh:'質子', cat:'structure', def:'位於原子核內、帶一個正相對電荷的粒子。', ex:'A proton has a relative charge of +1.'},
+      {en:'neutron', zh:'中子', cat:'structure', def:'位於原子核內、不帶電荷的粒子。', ex:'A neutron has no charge.'},
+      {en:'electron', zh:'電子', cat:'structure', def:'在原子核外活動、帶一個負相對電荷的粒子。', ex:'An electron has a very small relative mass.'},
+      {en:'nucleus', zh:'原子核', cat:'structure', def:'位於原子中央，含有質子和中子的微小區域。', ex:'Most of the mass of an atom is in its nucleus.'},
+      {en:'position in atom', zh:'在原子中的位置', cat:'structure', def:'粒子在原子內所在的區域。', ex:'State the position of a proton in an atom.'},
+      {en:'relative charge', zh:'相對電荷', cat:'structure', def:'比較亞原子粒子電荷時使用的數值。', ex:'The relative charge of an electron is −1.'},
+      {en:'relative mass', zh:'相對質量', cat:'structure', def:'比較亞原子粒子質量時使用的數值。', ex:'A proton has a relative mass of 1.'},
+      {en:'space', zh:'空間', cat:'structure', def:'物件之間或內部未被物質佔據的範圍。', ex:'Most of an atom is empty space.'},
+      {en:'empty', zh:'空的', cat:'structure', def:'沒有物質佔據。', ex:'The space between the nucleus and electrons is mostly empty.'},
+      {en:'electrically neutral', zh:'電中性', cat:'structure', def:'總正電荷和總負電荷相等，淨電荷為零。', ex:'An atom is electrically neutral.'},
+      {en:'atomic number', zh:'原子序數', cat:'structure', def:'一個原子中質子的數目。', ex:'The atomic number equals the number of protons.'},
+      {en:'mass number', zh:'質量數', cat:'structure', def:'一個原子中質子數和中子數的總和。', ex:'Mass number equals protons plus neutrons.'},
+      {en:'ion', zh:'離子', cat:'structure', def:'因失去或得到電子而帶電的粒子。', ex:'An ion carries a positive or negative charge.'},
+      {en:'lose electron', zh:'失去電子', cat:'structure', def:'原子移走電子的過程，通常會形成正離子。', ex:'A metal atom may lose an electron.'},
+      {en:'gain electron', zh:'得到電子', cat:'structure', def:'原子獲得電子的過程，通常會形成負離子。', ex:'A non-metal atom may gain an electron.'},
+      {en:'positive charge', zh:'正電荷', cat:'structure', def:'質子數多於電子數時出現的淨電荷。', ex:'A sodium ion has a positive charge.'},
+      {en:'negative charge', zh:'負電荷', cat:'structure', def:'電子數多於質子數時出現的淨電荷。', ex:'A chloride ion has a negative charge.'},
+      {en:'neutral', zh:'中性的', cat:'structure', def:'不帶淨電荷。', ex:'A neutral atom has equal numbers of protons and electrons.'},
+      {en:'periodic table', zh:'週期表', cat:'periodic', def:'按原子序數排列所有元素的表。', ex:'Elements are arranged in the periodic table.'},
+      {en:'main groups', zh:'主族', cat:'periodic', def:'週期表中由上至下的主要直行分類。', ex:'The main groups are numbered from I to 0 in this course.'},
+      {en:'similar', zh:'相似的', cat:'periodic', def:'在特徵或性質上相近。', ex:'Elements in the same group have similar chemical properties.'},
+      {en:'chemical properties', zh:'化學性質', cat:'periodic', def:'物質在化學反應中表現出的特性。', ex:'Reactivity is a chemical property.'},
+      {en:'physical properties', zh:'物理性質', cat:'periodic', def:'不改變物質化學身份便可觀察或量度的特性。', ex:'Density and melting point are physical properties.'},
+      {en:'difference', zh:'差異', cat:'periodic', def:'兩件事物不相同之處。', ex:'State one difference between metals and non-metals.'},
+      {en:'reactivity', zh:'反應性', cat:'periodic', def:'物質發生化學反應的容易程度。', ex:'The reactivity of Group I metals increases down the group.'},
+      {en:'helium', zh:'氦', cat:'applications', def:'化學符號為 He 的惰性氣體。', ex:'Helium is used to fill balloons.'},
+      {en:'balloons', zh:'氣球', cat:'applications', def:'可充入氣體並膨脹的柔軟容器。', ex:'Helium makes balloons rise.'},
+      {en:'lithium', zh:'鋰', cat:'applications', def:'化學符號為 Li 的活潑金屬元素。', ex:'Lithium is used in rechargeable batteries.'},
+      {en:'battery', zh:'電池', cat:'applications', def:'把化學能轉化為電能的裝置。', ex:'A lithium-ion battery can be recharged.'},
+      {en:'firework', zh:'煙花', cat:'applications', def:'燃燒時產生光、顏色和聲音的裝置。', ex:'Metal compounds give fireworks different colours.'}
+    ];
+
+    const $ = (selector) => document.querySelector(selector);
+    const $$ = (selector) => [...document.querySelectorAll(selector)];
+    const shuffle = (array) => {
+      const copy = [...array];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    };
+    const sample = (array, count) => shuffle(array).slice(0, count);
+
+    const PROGRESS_KEY = 'element-lab-131-mastered-v1';
+    let mastered = new Set(JSON.parse(localStorage.getItem(PROGRESS_KEY) || '[]'));
+    let currentView = 'topics';
+    let flashList = [...WORDS];
+    let flashIndex = 0;
+    let matchPairs = [];
+    let selectedEn = null;
+    let selectedZh = null;
+    let matchedCount = 0;
+    let quizItems = [];
+    let quizIndex = 0;
+    let quizScore = 0;
+    let quizAnswered = false;
+    let toastTimer;
+
+    function saveProgress() {
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify([...mastered]));
+      updateProgress();
+    }
+
+    function updateProgress() {
+      const count = mastered.size;
+      const percent = Math.round((count / WORDS.length) * 100);
+      $('#mastered-copy').textContent = `${count} 個已掌握`;
+      $('#progress-percent').textContent = `${percent}%`;
+      $('#progress-ring').style.setProperty('--progress', `${percent * 3.6}deg`);
+      $('#review-chip').textContent = `${count} / ${WORDS.length} 已掌握`;
+    }
+
+    function showToast(message) {
+      const el = $('#toast');
+      el.textContent = message;
+      el.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => el.classList.remove('show'), 1800);
+    }
+
+    function showView(name) {
+      currentView = name;
+      $$('.view').forEach(view => view.classList.toggle('active', view.id === `${name}-view`));
+      window.scrollTo({top: 0, behavior: 'smooth'});
+      if (name === 'flash') renderFlash();
+      if (name === 'match') newMatchRound();
+      if (name === 'quiz') startQuiz();
+    }
+
+    $$('[data-open]').forEach(btn => btn.addEventListener('click', () => showView(btn.dataset.open)));
+    $$('[data-home]').forEach(btn => btn.addEventListener('click', () => showView('home')));
+    $$('[data-topics]').forEach(btn => btn.addEventListener('click', () => showView('topics')));
+
+    function renderFlash() {
+      const word = flashList[flashIndex];
+      if (!word) return;
+      $('#flash-card').classList.remove('flipped');
+      $('#flash-word').textContent = word.en;
+      $('#flash-zh').textContent = word.zh;
+      $('#flash-count').textContent = `${flashIndex + 1} / ${flashList.length}`;
+      $('#know-btn').textContent = mastered.has(word.en) ? '已掌握 ✓' : '我識喇 ✓';
+    }
+
+    function nextFlash() {
+      flashIndex = (flashIndex + 1) % flashList.length;
+      renderFlash();
+    }
+
+    $('#flash-card').addEventListener('click', () => $('#flash-card').classList.toggle('flipped'));
+    $('#review-btn').addEventListener('click', () => { nextFlash(); showToast('已放到稍後再溫習'); });
+    $('#know-btn').addEventListener('click', () => {
+      const word = flashList[flashIndex];
+      mastered.add(word.en);
+      saveProgress();
+      showToast(`已掌握：${word.en}`);
+      nextFlash();
+    });
+    $('#sound-btn').addEventListener('click', () => {
+      if (!('speechSynthesis' in window)) return showToast('此瀏覽器未能播放讀音');
+      speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(flashList[flashIndex].en);
+      utterance.lang = 'en-GB';
+      utterance.rate = .82;
+      speechSynthesis.speak(utterance);
+    });
+
+    function newMatchRound() {
+      matchPairs = sample(WORDS, 6);
+      selectedEn = null;
+      selectedZh = null;
+      matchedCount = 0;
+      $('#match-progress').style.width = '0%';
+      $('#match-help').textContent = '找出 6 組正確配對';
+      renderMatchColumns();
+    }
+
+    function renderMatchColumns() {
+      const enCol = $('#match-en');
+      const zhCol = $('#match-zh');
+      enCol.innerHTML = '';
+      zhCol.innerHTML = '';
+      matchPairs.forEach(word => enCol.append(makeMatchButton(word, 'en')));
+      shuffle(matchPairs).forEach(word => zhCol.append(makeMatchButton(word, 'zh')));
+    }
+
+    function makeMatchButton(word, side) {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'match-option';
+      button.textContent = word[side];
+      button.dataset.word = word.en;
+      button.dataset.side = side;
+      button.addEventListener('click', () => selectMatch(button));
+      return button;
+    }
+
+    function selectMatch(button) {
+      if (button.classList.contains('matched')) return;
+      const side = button.dataset.side;
+      const previous = side === 'en' ? selectedEn : selectedZh;
+      if (previous) previous.classList.remove('selected');
+      button.classList.add('selected');
+      if (side === 'en') selectedEn = button; else selectedZh = button;
+      if (selectedEn && selectedZh) checkMatch();
+    }
+
+    function checkMatch() {
+      const correct = selectedEn.dataset.word === selectedZh.dataset.word;
+      const en = selectedEn;
+      const zh = selectedZh;
+      if (correct) {
+        en.classList.remove('selected'); zh.classList.remove('selected');
+        en.classList.add('matched'); zh.classList.add('matched');
+        en.disabled = true; zh.disabled = true;
+        matchedCount++;
+        $('#match-progress').style.width = `${matchedCount / 6 * 100}%`;
+        $('#match-help').textContent = matchedCount === 6 ? '全數配對成功！' : `答對 ${matchedCount} / 6 組`;
+        selectedEn = null; selectedZh = null;
+        if (matchedCount === 6) setTimeout(showMatchResult, 450);
+      } else {
+        en.classList.add('wrong'); zh.classList.add('wrong');
+        setTimeout(() => {
+          en.classList.remove('selected','wrong');
+          zh.classList.remove('selected','wrong');
+          selectedEn = null; selectedZh = null;
+        }, 450);
+      }
+    }
+
+    function showMatchResult() {
+      $('#match-panel').innerHTML = `
+        <div class="result-card">
+          <div class="result-orb">6/6</div>
+          <h2>配對完成！</h2>
+          <p>你已正確配對今輪 6 組詞彙。</p>
+          <div class="result-actions"><button class="primary-btn" id="match-again" type="button">再玩一組</button><button class="ghost-btn" data-result-home type="button">返回主頁</button></div>
+        </div>`;
+      $('#match-again').addEventListener('click', resetMatchPanel);
+      $('[data-result-home]').addEventListener('click', () => showView('home'));
+    }
+
+    function resetMatchPanel() {
+      $('#match-panel').innerHTML = `<div class="game-progress"><span id="match-progress"></span></div><p class="match-help" id="match-help">找出 6 組正確配對</p><div class="match-board"><div class="match-column" id="match-en"></div><div class="match-column" id="match-zh"></div></div>`;
+      newMatchRound();
+    }
+    $('#new-match').addEventListener('click', () => { resetMatchPanel(); showToast('已換上新一組詞彙'); });
+
+    function startQuiz() {
+      quizItems = sample(WORDS, 10).map((word, i) => ({word, direction: i % 2 === 0 ? 'en-zh' : 'zh-en'}));
+      quizIndex = 0;
+      quizScore = 0;
+      quizAnswered = false;
+      renderQuiz();
+    }
+
+    function renderQuiz() {
+      const panel = $('#quiz-panel');
+      const item = quizItems[quizIndex];
+      if (!item) return renderQuizResult();
+      const answerKey = item.direction === 'en-zh' ? 'zh' : 'en';
+      const prompt = item.word[item.direction === 'en-zh' ? 'en' : 'zh'];
+      const options = shuffle([item.word, ...sample(WORDS.filter(w => w.en !== item.word.en), 3)]);
+      quizAnswered = false;
+      panel.innerHTML = `
+        <div class="game-progress"><span style="width:${quizIndex / quizItems.length * 100}%"></span></div>
+        <div class="quiz-kicker">Question ${quizIndex + 1} of ${quizItems.length} · ${item.direction === 'en-zh' ? '選出中文意思' : '選出英文詞彙'}</div>
+        <h2 class="quiz-question">${prompt}</h2>
+        <div class="answers"></div>
+        <div class="feedback" id="quiz-feedback" aria-live="polite">
+          <div><strong id="feedback-title"></strong><span id="feedback-copy"></span></div>
+          <button class="next-btn" id="next-question" type="button">${quizIndex === quizItems.length - 1 ? '查看成績' : '下一題 →'}</button>
+        </div>`;
+      const answers = panel.querySelector('.answers');
+      options.forEach((option, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'answer';
+        button.innerHTML = `<span style="color:#8b99b1;margin-right:9px">${String.fromCharCode(65 + index)}.</span>${option[answerKey]}`;
+        button.addEventListener('click', () => answerQuiz(button, option, item.word));
+        answers.append(button);
+      });
+      $('#next-question').addEventListener('click', () => { quizIndex++; renderQuiz(); });
+    }
+
+    function answerQuiz(button, choice, correctWord) {
+      if (quizAnswered) return;
+      quizAnswered = true;
+      const correct = choice.en === correctWord.en;
+      if (correct) quizScore++;
+      $$('.answer').forEach(btn => {
+        btn.disabled = true;
+        const text = btn.textContent.slice(2).trim();
+        if (text === correctWord.en || text === correctWord.zh) btn.classList.add('correct');
+      });
+      if (!correct) button.classList.add('incorrect');
+      $('#feedback-title').textContent = correct ? '答對了！' : '差一點！';
+      $('#feedback-copy').textContent = ` 正確配對是 ${correctWord.en} — ${correctWord.zh}`;
+      $('#quiz-feedback').classList.add('show');
+    }
+
+    function renderQuizResult() {
+      const percent = quizScore * 10;
+      const message = percent >= 90 ? '掌握得非常好，可以挑戰另一輪！' : percent >= 70 ? '基礎很穩，重溫錯題詞彙會更好。' : '先用字卡溫習一次，再回來挑戰吧。';
+      $('#quiz-panel').innerHTML = `
+        <div class="result-card">
+          <div class="result-orb">${quizScore}/10</div>
+          <h2>${percent} 分</h2>
+          <p>${message}</p>
+          <div class="result-actions"><button class="primary-btn" id="quiz-again" type="button">再做 10 題</button><button class="ghost-btn" id="result-flash" type="button">溫習字卡</button></div>
+        </div>`;
+      $('#quiz-again').addEventListener('click', startQuiz);
+      $('#result-flash').addEventListener('click', () => showView('flash'));
+    }
+    $('#restart-quiz').addEventListener('click', () => { startQuiz(); showToast('已重新抽選 10 題'); });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && ['flash','match','quiz'].includes(currentView)) showView('home');
+      else if (event.key === 'Escape' && currentView === 'home') showView('topics');
+      if (currentView === 'flash' && event.code === 'Space' && !['BUTTON','SELECT'].includes(document.activeElement.tagName)) {
+        event.preventDefault();
+        $('#flash-card').classList.toggle('flipped');
+      }
+      if (currentView === 'flash' && event.key === 'ArrowRight') nextFlash();
+    });
+
+    function registerStudyTools() {
+      const context = document.modelContext;
+      if (!context?.registerTool) return;
+      const modes = ['topics', 'home', 'flash', 'match', 'quiz'];
+      try {
+        void Promise.resolve(context.registerTool({
+          name: 'start_study_mode',
+          title: '開始詞彙溫習模式',
+          description: '在 Element Lab 開啟課題列表、13.1 主頁、字卡、配對或選擇題模式。',
+          inputSchema: {
+            type: 'object',
+            properties: { mode: { type: 'string', enum: modes } },
+            required: ['mode'],
+            additionalProperties: false
+          },
+          annotations: { readOnlyHint: false, untrustedContentHint: false },
+          execute(input) {
+            if (!input || !modes.includes(input.mode)) throw new Error('請提供有效模式：topics、home、flash、match 或 quiz。');
+            showView(input.mode);
+            return { mode: input.mode, status: 'opened' };
+          }
+        })).catch(() => {});
+
+        void Promise.resolve(context.registerTool({
+          name: 'mark_vocabulary_mastered',
+          title: '標記已掌握詞彙',
+          description: '把一個或多個現有英文詞彙標記為已掌握，並同步更新畫面進度。',
+          inputSchema: {
+            type: 'object',
+            properties: { words: { type: 'array', items: { type: 'string' }, minItems: 1, uniqueItems: true } },
+            required: ['words'],
+            additionalProperties: false
+          },
+          annotations: { readOnlyHint: false, untrustedContentHint: false },
+          execute(input) {
+            if (!input || !Array.isArray(input.words) || input.words.length === 0) throw new Error('words 必須是非空白的詞彙陣列。');
+            const available = new Set(WORDS.map(word => word.en));
+            const invalid = input.words.filter(word => typeof word !== 'string' || !available.has(word));
+            if (invalid.length) throw new Error(`找不到詞彙：${invalid.join(', ')}`);
+            input.words.forEach(word => mastered.add(word));
+            saveProgress();
+            if (currentView === 'flash') renderFlash();
+            return { marked: input.words, masteredCount: mastered.size, total: WORDS.length };
+          }
+        })).catch(() => {});
+      } catch (_) {}
+    }
+
+    updateProgress();
+    registerStudyTools();
+  </script>
+</body>
+</html>
